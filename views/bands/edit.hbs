@@ -1,0 +1,86 @@
+<h3>Edit Band Info</h3>
+<div class="row">
+  <form action="/bands/{{band._id}}" method="POST" class="col s12">
+    <input type="hidden" name="_method" value="PUT" />
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="artist"
+          name="artist"
+          value="{{band.artist}}"
+          required
+        />
+        <label for="title">Artist</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="state"
+          name="state"
+          value="{{band.state}}"
+          required
+        />
+        <label for="title">State</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value="{{band.city}}"
+          required
+        />
+        <label for="title">City</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="genre"
+          name="genre"
+          value="{{band.genre}}"
+          required
+        />
+        <label for="title">Genre</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="url"
+          id="socialmedia"
+          name="socialmedia"
+          value="{{band.socialmedia}}"
+          required
+        />
+        <label for="title">Social Media</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <select name="status" id="status">
+          {{#select band.status}}
+            <option value="active" selected>Active</option>
+            <option value="hiatus">Hiatus</option>
+            <option value="split-up">Split-Up</option>
+            <option value="unknown">Unknown</option>
+          {{/select}}
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <input type="submit" value="Save" class="btn" />
+      <a href="/bands" class="btn orange">Cancel</a>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col s4 input-field">
+    <label for="search">Search</label>
+    <input type="text" id="search" />
+  </div>
+  <div class="col s4 input-field">
+    <select name="filter-search-by" id="status">
+      <label for="status">Filter Search</label>
+      <option value="by-artist" selected>By Artist</option>
+      <option value="by-city">By City</option>
+      <option value="by-state">By State</option>
+      <option value="by-genre">By Genre </option>      
+    </select>
+  </div>
+  <div class="col s4 input-field">
+    <select name="set-status" id="set-status">
+      <option value="any" selected>Any</option>
+      <option value="active" >Active</option>
+      <option value="hiatus">Hiatus</option>
+      <option value="split-up">Split-up</option>
+      <option value="unknown">Unknown</option>
+       <label for="status">Set Status</label>
+    </select>
+  </div>
+
+</div>
+
+{{#if venues}}
+  <table class="responsive-table index-table">
+    <thead class="grey darken-3">
+      <tr>
+        <th>Name</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Added By</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each venues}}
+        <tr>
+          <td><a href="/venues/{{_id}}">{{name}}</a></td>
+          <td>{{state}}</td>
+          <td>{{city}}</td>
+          <td>{{address}}</td>
+          <td><span class="dash-status">{{status}}</span></td>
+          <td><a href="/profile/{{user._id}}">{{user.displayName}}</a></td>        
+          <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
+          <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>
+         
+        </tr>        
+        
+      {{/each}}
+     
+        
+    </tbody>
+  </table>
+{{else}}
+  <p>There are no venues created</p>
+{{/if}}
+
+{{#if venue_succ_msg}}
+  <script>
+    window.onload = function(){ M.toast({ html: '{{venue_succ_msg}}', classes:
+    "white-text green" }) }
+  </script>
+{{/if}}
+
+<script src="/js/table-filtering.js"></script>

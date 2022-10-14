@@ -1,0 +1,38 @@
+<nav class="grey darken-3 white-text">
+  <div class="nav-wrapper">
+
+    <a href="/bands" class="brand-logo size-reduce center">Local Bands Database</a>
+    <a
+      href="#"
+      data-target="mobile-demo"
+      class="sidenav-trigger show-on-large"
+    ><i class="fas fa-bars"></i></a>
+
+    <div class="row">
+      <div class="my-container">
+        <a class="my-container" href="/profile/{{user._id}}">
+          {{user.firstName}}
+          <img
+            class="circle-img"
+            referrerpolicy="no-referrer"
+            src="{{user.image}}"
+            height="32"
+            alt=""
+          />
+        </a>
+      </div>
+
+    </div>
+
+    <ul class="sidenav grey darken-3 white-text" id="mobile-demo">
+      <li><a class="white-text" href="/bands">Bands</a></li>
+      <li><a class="white-text" href="/venues">Venues</a></li>
+      <li><a class="white-text" href="/dashboard">Dashboard</a></li>
+      <li><a class="white-text" href="/profile/{{user._id}}">Profile</a></li>
+      <li><a class="white-text" href="/auth/logout">Logout</a></li>
+
+    </ul>
+
+  </div>
+
+</nav>

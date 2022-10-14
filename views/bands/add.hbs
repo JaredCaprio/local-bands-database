@@ -1,0 +1,62 @@
+<h3>Add Band</h3>
+<div class="row">
+  <form action="/bands" method="post" class="col s12">
+    <div class="row">
+      <div class="input-field">
+        <input type="text" id="artist" name="artist" required />
+        <label for="title">Artist</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input type="text" id="state" name="state" required />
+        <label for="title">State</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input type="text" id="city" name="city" required />
+        <label for="title">City</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input type="text" id="genre" name="genre" required />
+        <label for="title">Genre</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <input type="url" id="socialmedia" name="socialmedia" required />
+        <label for="title">Social Media</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <select name="status" id="status">
+          <option value="active" selected>Active</option>
+          <option value="hiatus">Hiatus</option>
+          <option value="split-up">Split-Up</option>
+          <option value="unknown">Unknown</option>
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <input type="submit" value="Save" class="btn" />
+        <a href="/dashboard" class="btn orange">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+{{#if band_error_msg}}
+  <script>
+    window.onload = function(){ M.toast({ html: '{{band_error_msg}}', classes:
+    "black-text red" }) }
+  </script>
+{{/if}}

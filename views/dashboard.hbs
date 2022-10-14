@@ -1,0 +1,84 @@
+<h4>Welcome {{user.firstName}}</h4>
+
+<div data-bands-tab class="chip grey darken-1 hoverable">
+  <a href="#">Bands</a>
+</div>
+<div data-venues-tab class="chip grey darken-3 hoverable">
+  <a href="#">Venues</a>
+</div>
+
+{{#if bands}}
+  <table class="responsive-table dashboard-bands">
+    <thead data-dashboard-thead class="grey darken-3">
+      <tr>
+        <th>Artist</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Genre</th>
+        <th>Status</th>
+        <th>Added By</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each bands}}
+        <tr class="max-width">
+          <td><a href="/bands/{{_id}}">{{artist}}</a></td>
+          <td>{{state}}</td>
+          <td>{{city}}</td>
+          <td>{{genre}}</td>
+          <td><span class="dash-status">{{status}}</span></td>
+          <td><a href="/profile/{{_id}}">{{user.displayName}}</a></td>          
+          <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
+          <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>          
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>You have not created any stoires</p>
+{{/if}}
+
+
+{{#if venues}}
+  <table class="responsive-table dashboard-venues">
+    <thead data-dashboard-thead class="grey darken-3">
+      <tr>
+        <th>Artist</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Genre</th>
+        <th>Status</th>
+        <th>Added By</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each venues}}
+        <tr class="max-width">
+          <td><a href="/bands/{{_id}}">{{name}}</a></td>
+          <td>{{state}}</td>
+          <td>{{city}}</td>
+          <td>{{address}}</td>
+          <td><span class="dash-status">{{status}}</span></td>
+          <td><a href="/profile/{{_id}}">{{user.displayName}}</a></td>          
+          <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
+          <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>          
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>You have not created any stoires</p>
+{{/if}}
+
+{{#if band_succ_msg}}
+  <script>
+    window.onload = function(){ M.toast({ html: '{{band_succ_msg}}', classes:
+    "white-text green" }) }
+  </script>
+{{/if}}
+
+<script src="/js/dashboard.js"></script>

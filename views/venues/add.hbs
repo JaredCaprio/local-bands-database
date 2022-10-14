@@ -1,0 +1,98 @@
+<h3>Add Venue</h3>
+<div class="row">
+  <form action="/venues" method="post" class="col s12">
+    <div class="row">
+      <div class="input-field">
+        <input
+          data-add-venue-name
+          type="text"
+          id="autocomplete"
+          name="name"
+          value=" "
+          required
+        />
+        <label for="title">Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" value=" " required />
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" value=" " required />
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" value=" " required />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="inputfield">
+        <label for="website">Website</label>
+        <input type="url" id="website" name="website" value=" " required />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label for=""></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <select name="status" id="status">
+          <option class="pink" value="open" selected>Open</option>
+          <option value="temporarily closed">Temporarily Closed</option>
+          <option value="permanently closed">Permanently Closed</option>
+          <option value="unknown">Unknown</option>
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="map-add"></div>
+    </div>
+    <div class="row">
+      <div hidden class="input-field">
+        <label for="lat">Latitude</label>
+        <input type="text" id="lat" name="lat" value=" " readonly required />
+
+      </div>
+      <div hidden class="input-field">
+        <label for="lng">Longitude</label>
+        <input type="text" id="lng" name="lng" value=" " readonly required />
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input type="submit" value="Save" class="btn" />
+        <a href="/venues" class="btn orange">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1DkF6BCiAyD8OhNcaUncBdHJJyXTLtB0&libraries=places"
+>
+</script>
+<script src="../js/main.js" defer></script>
+<script src="../../js/google-maps-add.js"></script>
+{{#if venue_error_msg}}
+  <script>
+    window.onload = function(){ M.toast({ html: '{{venue_error_msg}}', classes:
+    "black-text red" }) }
+  </script>
+{{/if}}

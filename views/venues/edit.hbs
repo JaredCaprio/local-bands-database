@@ -1,0 +1,111 @@
+<h3>Edit Venue</h3>
+<div class="row">
+  <form action="/venues/update/{{venue._id}}" method="post" class="col s12">
+    <input type="hidden" name="_method" value="PUT" />
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="edit-venue-name"
+          value="{{venue.name}}"
+          required
+        />
+        <label for="title">Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="state"
+          name="state"
+          value="{{venue.state}}"
+          required
+        />
+        <label for="title">State</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value="{{venue.city}}"
+          required
+        />
+        <label for="title">City</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value="{{venue.address}}"
+          required
+        />
+        <label for="title">Address</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <select name="status" id="status">
+          {{#select venue.status}}
+            <option class="pink" value="open" selected>Open</option>
+            <option value="temporarily closed">Temporarily Closed</option>
+            <option value="permanently closed">Permanently Closed</option>
+            <option value="unknown">Unknown</option>
+          {{/select}}
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <div id="map-edit"></div>
+    <div class="row">
+      <div hidden class="input-field">
+        <label for="lat">Latitude</label>
+        <input
+          type="text"
+          id="lat"
+          name="lat"
+          class="edit-lat"
+          value="{{venue.lat}}"
+          readonly
+          required
+        />
+
+      </div>
+      <div hidden class="input-field">
+        <label for="lng">Longitude</label>
+        <input
+          class="edit-lng"
+          type="text"
+          id="lng"
+          name="lng"
+          value="{{venue.lng}}"
+          readonly
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input type="submit" value="Save" class="btn" />
+        <a href="/venues/{{venue._id}}" class="btn orange">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1DkF6BCiAyD8OhNcaUncBdHJJyXTLtB0&libraries=places"
+>
+</script>
+<script src="../../js/google-maps-edit.js"></script>
