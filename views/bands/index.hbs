@@ -1,29 +1,31 @@
-<div class="row">
-  <div class="col s4 input-field">
-    <label for="search">Search</label>
-    <input type="text" id="search" />
+<form action="/bands/search" method="POST">
+  <div class="row center">
+    <div class="col s3 input-field">
+      <label for="search">Search</label>
+      <input type="text" name="query" id="search" />
+    </div>
+    <div class="col s3 input-field">
+      <select name="search-by" id="bands-status">
+        <label for="status">Filter Search</label>
+        <option value="by-artist" selected>By Artist</option>
+        <option value="by-city">By City</option>
+        <option value="by-state">By State</option>
+        <option value="by-genre">By Genre </option>
+      </select>
+    </div>
+    <div class="col s3 input-field">
+      <select name="status" id="bands-set-status">
+        <option value="any" selected>Any</option>
+        <option value="active" >Active</option>
+        <option value="hiatus">Hiatus</option>
+        <option value="split-up">Split-up</option>
+        <option value="unknown">Unknown</option>
+         <label for="status">Set Status</label>
+      </select>
+    </div>
+  <div class="col s3 input-field"><input type="submit" value="Search" class="btn-large"></div>
   </div>
-  <div class="col s4 input-field">
-    <select name="filter-search-by" id="status">
-      <label for="status">Filter Search</label>
-      <option value="by-artist" selected>By Artist</option>
-      <option value="by-city">By City</option>
-      <option value="by-state">By State</option>
-      <option value="by-genre">By Genre </option>      
-    </select>
-  </div>
-  <div class="col s4 input-field">
-    <select name="set-status" id="set-status">
-      <option value="any" selected>Any</option>
-      <option value="active" >Active</option>
-      <option value="hiatus">Hiatus</option>
-      <option value="split-up">Split-up</option>
-      <option value="unknown">Unknown</option>
-       <label for="status">Set Status</label>
-    </select>
-  </div>
-
-</div>
+</form>
 
 {{#if bands}}
   <table class="responsive-table index-table">
@@ -40,51 +42,25 @@
       </tr>
     </thead>
     <tbody data-bands-index-tbody>
+  {{bands.user}}
+       
       {{#each bands}}
-
         <tr class="max-width">
           <td><a href="/bands/{{_id}}">{{artist}}</a></td>
           <td>{{state}}</td>
           <td>{{city}}</td>
           <td>{{genre}}</td>
           <td><span class="dash-status">{{status}}</span></td>
-          <td><a href="profile/{{user._id}}">{{user.displayName}}</a></td>
-          <td>{{{editIcon user ../user _id false false "band"}}}</td>
-          <td>{{{deleteIcon user ../user _id "band"}}}</td>     
+          <td><a href="/profile/{{user._id}}">{{user.displayName}}</a></td>
+          <td class="spacing-reset">{{{editIcon user ../user _id false false "band"}}}</td>
+          <td class="spacing-reset">{{{deleteIcon user ../user _id "band"}}}</td>     
         </tr>
       {{/each}}
     </tbody>
   </table>
+ 
 {{else}}
   <p>There are no bands created</p>
 {{/if}}
 
 <script src="/js/table-filtering.js"></script>
-
-{{!-- <div class="row">
-  {{#each stories}}
-    <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          {{{editIcon user ../user _id}}}
-        </div>
-        <div class="card-content center-align">
-          <h5>{{title}}</h5>
-          <p>{{stripTags (truncate body 150)}}</p>
-          <br />
-          <div class="chip">
-            <img src="{{user.image}}" alt="" referrerpolicy="no-referrer" />
-            <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
-          </div>
-        </div>
-        <div class="card-action center-align">
-          <a href="/stories/{{_id}}" class="btn grey">Read More</a>
-        </div>
-      </div>
-    </div>
-
-  
-  {{else}}
-    <p>No stories to display</p>
-  {{/each}}
-</div> --}}

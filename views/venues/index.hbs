@@ -1,28 +1,35 @@
-<div class="row">
-  <div class="col s4 input-field">
-    <label for="search">Search</label>
-    <input type="text" id="search" />
-  </div>
-  <div class="col s4 input-field">
-    <select name="filter-search-by" id="status">
-      <label for="status">Filter Search</label>
-      <option value="by-name" selected>By Name</option>
-      <option value="by-city">By City</option>
-      <option value="by-state">By State</option>
-    </select>
-  </div>
-  <div class="col s4 input-field">
-    <select name="set-status" id="set-status">
-      <option value="any" selected>Any</option>
-      <option value="open">Open</option>
-      <option value="temporarily closed" >Temporarily Closed</option>
-      <option value="permanently closed">Permanently Closed</option>
-      <option value="unknown">Unknown</option>
-       <label for="status">Set Status</label>
-    </select>
-  </div>
+<form action="/venues/search">
+  <div class="row">
+    <div class="col s3 input-field">
+      <label for="search">Search</label>
+      <input type="text" id="search" name="query" />
+    </div>
+    <div class="col s3 input-field">
+      <select name="filter-search-by" id="venues-status">
+        <label for="status">Filter Search</label>
+        <option value="by-name" selected>By Name</option>
+        <option value="by-city">By City</option>
+        <option value="by-state">By State</option>
+      </select>
+    </div>
+    <div class="col s3 input-field">
+      <select name="set-status" id="venues-set-status">
+        <option value="any" selected>Any</option>
+        <option value="open">Open</option>
+        <option value="temporarily closed">Temporarily Closed</option>
+        <option value="permanently closed">Permanently Closed</option>
+        <option value="unknown">Unknown</option>
+        <label for="status">Set Status</label>
+      </select>
+    </div>
+    <div class="col s3 input-field"><input
+        type="submit"
+        value="Search"
+        class="btn-large"
+      /></div>
 
-</div>
+  </div>
+</form>
 
 {{#if venues}}
   <table class="responsive-table index-table">
@@ -46,15 +53,14 @@
           <td>{{city}}</td>
           <td>{{address}}</td>
           <td><span class="dash-status">{{status}}</span></td>
-          <td><a href="/profile/{{user._id}}">{{user.displayName}}</a></td>        
+          <td><a href="/profile/{{user._id}}">{{user.displayName}}</a></td>
           <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
           <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>
-         
-        </tr>        
-        
+
+        </tr>
+
       {{/each}}
-     
-        
+
     </tbody>
   </table>
 {{else}}

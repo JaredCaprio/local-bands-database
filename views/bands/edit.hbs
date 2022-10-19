@@ -5,6 +5,7 @@
     <div class="row">
       <div class="input-field">
         <input
+          data-artist
           type="text"
           id="artist"
           name="artist"
@@ -77,6 +78,12 @@
       </div>
     </div>
 
+    <div class="input-field"><input
+        data-hidden-all-caps
+        type="text"
+        name="allCaps"
+      /></div>
+
     <div class="row">
       <input type="submit" value="Save" class="btn" />
       <a href="/bands" class="btn orange">Cancel</a>
@@ -84,3 +91,4 @@
 
   </form>
 </div>
+<script src="/js/all-caps-input.js"></script>

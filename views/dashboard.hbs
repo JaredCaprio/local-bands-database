@@ -1,14 +1,66 @@
 <h4>Welcome {{user.firstName}}</h4>
 
-<div data-bands-tab class="chip grey darken-1 hoverable">
+<div data-bands-tab class="chip grey darken-2 hoverable">
   <a href="#">Bands</a>
 </div>
 <div data-venues-tab class="chip grey darken-3 hoverable">
   <a href="#">Venues</a>
 </div>
 
+  <div class="row venues-filter">
+    <div class="col s4 input-field">
+      <label for="search">Search</label>
+      <input type="text" id="ven-search" />
+    </div>
+    <div class="col s4 input-field">
+      <select data-venues-filter-by name="filter-search-by" id="venues-status">
+        <label for="status">Filter Search</label>
+        <option value="by-name" selected>By Name</option>
+        <option value="by-city">By City</option>
+        <option value="by-state">By State</option>
+      </select>
+    </div>
+    <div class="col s4 input-field">
+      <select data-venues-status name="set-status" id="venues-set-status">
+        <option value="any" selected>Any</option>
+        <option value="open">Open</option>
+        <option value="temporarily closed" >Temporarily Closed</option>
+        <option value="permanently closed">Permanently Closed</option>
+        <option value="unknown">Unknown</option>
+         <label for="status">Set Status</label>
+      </select>
+    </div>
+  </div>
+  
+  <div class="row bands-filter">
+    <div class="col s4 input-field">
+      <label for="search">Search</label>
+      <input type="text" id="bnd-search" />
+    </div>
+    <div class="col s4 input-field">
+      <select data-bands-filter-by name="filter-search-by" id="bands-status">
+        <label for="status">Filter Search</label>
+        <option value="by-artist" selected>By Artist</option>
+        <option value="by-city">By City</option>
+        <option value="by-state">By State</option>
+        <option value="by-genre">By Genre </option>
+      </select>
+    </div>
+    <div class="col s4 input-field">
+      <select data-bands-status name="set-status" id="bands-set-status">
+        <option value="any" selected>Any</option>
+        <option value="active" >Active</option>
+        <option value="hiatus">Hiatus</option>
+        <option value="split-up">Split-up</option>
+        <option value="unknown">Unknown</option>
+         <label for="status">Set Status</label>
+      </select>
+    </div>
+  
+  </div>
+
 {{#if bands}}
-  <table class="responsive-table dashboard-bands">
+  <table class="dashboard-bands responsive-table bnd-index-table">
     <thead data-dashboard-thead class="grey darken-3">
       <tr>
         <th>Artist</th>
@@ -30,8 +82,8 @@
           <td>{{genre}}</td>
           <td><span class="dash-status">{{status}}</span></td>
           <td><a href="/profile/{{_id}}">{{user.displayName}}</a></td>          
-          <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
-          <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>          
+          <td class="spacing-reset">{{{editIcon user ../user _id false false "band" }}}</td>
+          <td class="spacing-reset">{{{deleteIcon user._id ../user _id "band"}}}</td>          
         </tr>
       {{/each}}
     </tbody>
@@ -42,13 +94,13 @@
 
 
 {{#if venues}}
-  <table class="responsive-table dashboard-venues">
+  <table style="display: none;" class="responsive-table dashboard-venues ven-index-table">
     <thead data-dashboard-thead class="grey darken-3">
       <tr>
-        <th>Artist</th>
+        <th>Name</th>
         <th>State</th>
         <th>City</th>
-        <th>Genre</th>
+        <th>Address</th>
         <th>Status</th>
         <th>Added By</th>
         <th></th>
@@ -58,7 +110,7 @@
     <tbody>
       {{#each venues}}
         <tr class="max-width">
-          <td><a href="/bands/{{_id}}">{{name}}</a></td>
+          <td><a href="/venues/{{_id}}">{{name}}</a></td>
           <td>{{state}}</td>
           <td>{{city}}</td>
           <td>{{address}}</td>
@@ -82,3 +134,4 @@
 {{/if}}
 
 <script src="/js/dashboard.js"></script>
+<script src="/js/table-filtering.js"></script>

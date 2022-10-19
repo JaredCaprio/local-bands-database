@@ -83,6 +83,13 @@ a {
   .size-reduce {
     font-size: 1.25em !important;
   }
+  .dashboard-venues {
+    display: none;
+  }
+
+  .venues-filter {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 350px) {
@@ -102,6 +109,7 @@ a {
 .dashboard-venues {
   display: none;
 }
-.dashboard-bands {
-  display: table;
+
+.venues-filter {
+  display: none;
 }
