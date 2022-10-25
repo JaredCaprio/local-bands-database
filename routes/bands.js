@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { ensureAuth } = require("../middleware/auth");
 const bandsController = require("../controllers/bands");
+const upload = require("../middleware/multer");
 
 // @desc  show add page
 // @route GET /bands/add
@@ -9,7 +10,12 @@ router.get("/add", ensureAuth, bandsController.getAdd);
 
 // @desc  process add form
 // @route GET /bands
-router.post("/", ensureAuth, bandsController.processAdd);
+router.post(
+  "/",
+  ensureAuth,
+  upload.single("imgFile"),
+  bandsController.processAdd
+);
 
 // @desc  show all bands
 // @route GET /bands

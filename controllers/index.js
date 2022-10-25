@@ -13,10 +13,12 @@ module.exports = {
     try {
       const bands = await Band.find({ user: req.user.id })
         .populate("user")
-        .lean();
+        .lean()
+        .sort({ artist: 1 });
       const venues = await Venue.find({ user: req.user.id })
         .populate("user")
-        .lean();
+        .lean()
+        .sort({ name: 1 });
       res.render("dashboard", {
         name: req.user.firstName,
         image: req.user.image,

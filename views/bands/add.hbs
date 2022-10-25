@@ -1,9 +1,14 @@
 <h3>Add Band</h3>
 <div class="row">
-  <form action="/bands" method="post" class="col s12">
+  <form
+    action="/bands"
+    method="post"
+    enctype="multipart/form-data"
+    class="col s12"
+  >
     <div class="row">
       <div class="input-field">
-        <input data-artist type="text" id="artist" name="artist" required />
+        <input data-name type="text" id="artist" name="artist" required />
         <label for="title">Artist</label>
       </div>
     </div>
@@ -50,7 +55,12 @@
         type="text"
         name="allCaps"
       /></div>
-
+    <div class="row">
+      <div class="input-field">
+        <p><label for="bandImage">Band Image</label></p>
+        <input type="file" id="bandImage" name="imgFile" />
+      </div>
+    </div>
     <div class="row">
       <div class="input-field">
         <input type="submit" value="Save" class="btn" />

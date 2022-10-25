@@ -1,5 +1,10 @@
-* {
+*:not(span) {
   color: white;
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none;
 }
 
 .dropdown-content li > a,
@@ -52,6 +57,7 @@ a {
 .spacing-reset {
   padding: 0;
   margin: 0;
+  margin-right: 0 !important;
   text-align: center;
 }
 

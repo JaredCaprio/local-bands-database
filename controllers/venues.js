@@ -120,6 +120,7 @@ module.exports = {
   },
   searchVenue: async (req, res) => {
     try {
+      console.log(req.body.setStatus);
       const queryAllCaps = req.body.query.toUpperCase();
       const venues = await Venue.find({
         allCaps: { $regex: RegExp(queryAllCaps, "i") },

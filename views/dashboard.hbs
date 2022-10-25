@@ -1,9 +1,9 @@
 <h4>Welcome {{user.firstName}}</h4>
 
-<div data-bands-tab class="chip grey darken-2 hoverable">
+<div style="font-size: 20px;" data-bands-tab class="chip grey darken-2 hoverable">
   <a href="#">Bands</a>
 </div>
-<div data-venues-tab class="chip grey darken-3 hoverable">
+<div style="font-size: 20px;" data-venues-tab class="chip grey darken-3 hoverable">
   <a href="#">Venues</a>
 </div>
 
@@ -81,7 +81,7 @@
           <td>{{city}}</td>
           <td>{{genre}}</td>
           <td><span class="dash-status">{{status}}</span></td>
-          <td><a href="/profile/{{_id}}">{{user.displayName}}</a></td>          
+          <td><a href="/profile/{{user._id}}">{{user.displayName}}</a></td>          
           <td class="spacing-reset">{{{editIcon user ../user _id false false "band" }}}</td>
           <td class="spacing-reset">{{{deleteIcon user._id ../user _id "band"}}}</td>          
         </tr>
@@ -115,7 +115,7 @@
           <td>{{city}}</td>
           <td>{{address}}</td>
           <td><span class="dash-status">{{status}}</span></td>
-          <td><a href="/profile/{{_id}}">{{user.displayName}}</a></td>          
+          <td><a href="/profile/{{user._id}}">{{user.displayName}}</a></td>          
           <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
           <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>          
         </tr>

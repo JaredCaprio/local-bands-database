@@ -1,16 +1,16 @@
-<form action="/bands/search" method="POST">
+<form action="/bands/search?param=query" method="POST">
   <div class="row center">
     <div class="col s3 input-field">
       <label for="search">Search</label>
       <input type="text" name="query" id="search" />
     </div>
     <div class="col s3 input-field">
-      <select name="search-by" id="bands-status">
+      <select name="searchBy" id="bands-status">
         <label for="status">Filter Search</label>
-        <option value="by-artist" selected>By Artist</option>
-        <option value="by-city">By City</option>
-        <option value="by-state">By State</option>
-        <option value="by-genre">By Genre </option>
+        <option value="artist" selected>By Artist</option>
+        <option value="city">By City</option>
+        <option value="state">By State</option>
+        <option value="genre">By Genre </option>
       </select>
     </div>
     <div class="col s3 input-field">
@@ -18,7 +18,7 @@
         <option value="any" selected>Any</option>
         <option value="active" >Active</option>
         <option value="hiatus">Hiatus</option>
-        <option value="split-up">Split-up</option>
+        <option value="splitUp">Split-up</option>
         <option value="unknown">Unknown</option>
          <label for="status">Set Status</label>
       </select>
@@ -63,4 +63,4 @@
   <p>There are no bands created</p>
 {{/if}}
 
-<script src="/js/table-filtering.js"></script>
+<script src="/js/bands-index.js"></script>

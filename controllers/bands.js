@@ -1,24 +1,46 @@
 const Band = require("../models/Band");
 const User = require("../models/User");
 const { ensureAuth } = require("../middleware/auth");
+const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
   //Renders out the add band page
   getAdd: (req, res) => {
-    res.render("bands/add");
+    res.render("bands/add", { title: "Add band" });
   },
   //Process add form and creates new document in database
   processAdd: async (req, res) => {
     try {
       req.body.user = req.user.id;
       const findBand = await Band.exists({
-        name: req.body.name,
+        artist: req.body.artist,
         city: req.body.city,
       });
-      console.log(req.body);
-      console.log(findBand);
+
       if (!findBand) {
-        await Band.create(req.body);
+        const imgUpload = await cloudinary.uploader.upload(req.file.path, {
+          folder: "local-bands-database",
+        });
+        console.log(req.file.path);
+        let reducedImg = cloudinary.image(imgUpload.secure_url, {
+          width: 400,
+          crop: "pad",
+          gravity: "faces",
+          alt: req.body.artist,
+          class: "materialboxed",
+        });
+        await Band.create({
+          artist: req.body.artist,
+          allCaps: req.body.allCaps,
+          state: req.body.state,
+          city: req.body.city,
+          genre: req.body.genre,
+          user: req.user.id,
+          status: req.body.status,
+          socialmedia: req.body.socialmedia,
+          image: reducedImg,
+          cloudinaryId: imgUpload.public_id,
+        });
         req.flash("band_succ_msg", "Band added");
         res.redirect("/dashboard");
       } else {
@@ -113,7 +135,8 @@ module.exports = {
   //Deletes one band
   deleteBand: async (req, res) => {
     try {
-      await Band.deleteOne({ _id: req.params.id });
+      let band = await Band.deleteOne({ _id: req.params.id });
+      await cloudinary.uploader.destroy(band.cloudinaryId);
       res.redirect("/bands");
     } catch (err) {
       console.error(err);
@@ -140,9 +163,15 @@ module.exports = {
   },
   searchBand: async (req, res) => {
     try {
-      const queryAllCaps = req.body.query.toUpperCase();
+      const findBy = req.body.searchBy;
+      let query = req.body.query;
+      if (/[a-zA-Z0-9]/g.test(query)) {
+        query = req.body.query;
+        console.log("true", typeof query);
+      }
       const bands = await Band.find({
-        allCaps: { $regex: RegExp(queryAllCaps, "i") },
+        [findBy]: { $regex: RegExp(query, "i") },
+        status: req.body.status,
       })
         .populate("user")
         .sort({ artist: 1 })

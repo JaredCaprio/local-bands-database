@@ -5,6 +5,7 @@
         <div class="card-content">
           <span class="card-title">
             <img
+              class="materialboxed"
               src="{{user.image}}"
               height="150"
               referrerpolicy="no-referrer"
@@ -15,20 +16,46 @@
         </div>
       </div>
       <div
-        class="card grey darken-3"
-        style="max-height: 20rem;   overflow-y: scroll;"
+        class="card grey darken-3 center"
+        style="max-height: 20rem; overflow-y: scroll;"
       >
         <div class="card-content">
-          <span class="card-title">{{user.firstName}}'s Bands</span>
-          {{#each bands}}
-            <table class="stripped">
-              <tbody>
+          <span class="card-title">{{user.firstName}}'s contributions</span>
+          <div
+            style="font-size: 20px;"
+            data-bands-tab
+            class="chip grey darken-2 hoverable"
+          >
+            <a href="#">Bands</a>
+          </div>
+          <div
+            style="font-size: 20px;"
+            data-venues-tab
+            class="chip grey darken-3 hoverable"
+          >
+            <a href="#">Venues</a>
+          </div>
+
+          <table data-bands-table class="stripped">
+            <tbody>
+              {{#each bands}}
                 <tr>
                   <td><a href="/bands/{{_id}}">{{artist}}</a></td>
                 </tr>
-              </tbody>
-            </table>
-          {{/each}}
+              {{/each}}
+            </tbody>
+          </table>
+
+          <table data-venues-table class="stripped hide">
+            <tbody>
+              {{#each venues}}
+                <tr>
+                  <td><a href="/venues/{{_id}}">{{name}}</a></td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>
@@ -78,3 +105,6 @@
   {{{profileEditIcon user._id loggedUser._id}}}
 
 </div>
+
+<script src="/js/profile.js"></script>
+<script src="/js/materialize-init.js"></script>

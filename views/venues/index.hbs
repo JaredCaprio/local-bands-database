@@ -1,11 +1,11 @@
-<form action="/venues/search">
+<form action="/venues/search" method="POST">
   <div class="row">
     <div class="col s3 input-field">
       <label for="search">Search</label>
       <input type="text" id="search" name="query" />
     </div>
     <div class="col s3 input-field">
-      <select name="filter-search-by" id="venues-status">
+      <select name="searchBy" id="venues-status">
         <label for="status">Filter Search</label>
         <option value="by-name" selected>By Name</option>
         <option value="by-city">By City</option>
@@ -13,7 +13,7 @@
       </select>
     </div>
     <div class="col s3 input-field">
-      <select name="set-status" id="venues-set-status">
+      <select name="setStatus" id="venues-set-status">
         <option value="any" selected>Any</option>
         <option value="open">Open</option>
         <option value="temporarily closed">Temporarily Closed</option>

@@ -1,18 +1,21 @@
 const express = require("express");
 const Band = require("../models/Band");
 const User = require("../models/User");
+const Venue = require("../models/Venue");
 const { findOneAndUpdate } = require("../models/Band");
 
 module.exports = {
   getProfilePage: async (req, res) => {
     const user = await User.findOne({ _id: req.params.id }).lean();
     const bands = await Band.find({ user: req.params.id }).lean().limit(50);
+    const venues = await Venue.find({ user: req.params.id }).lean().limit(50);
 
     res.render("profile/profile", {
       layout: "profile",
       user,
       loggedUser: req.user,
       bands,
+      venues,
     });
   },
   getEditProfile: async (req, res) => {

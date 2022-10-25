@@ -7,7 +7,7 @@ const lngInput = document.getElementById("lng");
 const stateInput = document.getElementById("state");
 const cityInput = document.getElementById("city");
 const addressInput = document.getElementById("address");
-const nameInput = document.querySelector("[data-add-venue-name]");
+const nameInput = document.querySelector("[data-name]");
 
 //Google maps Set up
 function initMap() {

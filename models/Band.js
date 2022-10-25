@@ -35,6 +35,14 @@ const BandSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
