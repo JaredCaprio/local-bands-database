@@ -119,3 +119,8 @@ a {
 .venues-filter {
   display: none;
 }
+/*dropdown */
+
+.image-edit-trigger {
+  transform: translate(10px, -102px);
+}

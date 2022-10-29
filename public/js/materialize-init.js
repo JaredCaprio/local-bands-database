@@ -9,3 +9,7 @@ M.FloatingActionButton.init(document.querySelector(".fixed-action-btn"), {
   direction: "top",
   hoverEnabled: true,
 });
+
+M.Dropdown.init(document.querySelector(".image-edit-trigger"), {
+  constrainWidth: false,
+});

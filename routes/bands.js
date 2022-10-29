@@ -31,7 +31,12 @@ router.get("/edit/:id", ensureAuth, bandsController.showEditBand);
 
 // @desc  update band
 // @route PUT /bands/:id
-router.put("/:id", ensureAuth, bandsController.updateBand);
+router.put(
+  "/:id",
+  ensureAuth,
+  upload.single("imgFile"),
+  bandsController.updateBand
+);
 
 // @desc  Delete band
 // @route DELETE /bands/:id

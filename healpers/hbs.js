@@ -37,6 +37,8 @@ module.exports = {
         <i class="fas fa-edit fa-small"></i></a>`;
       } else if (flat && type === "venue") {
         return `<a href="/venues/edit/${itemId}"><i class="fas fa-edit"></i></a>`;
+      } else if (flat && type === "image") {
+        return ``;
       } else if (!flat && !floating && type === "venue") {
         return `<a href="/venues/edit/${itemId}" class="btn waves-effect"><i class="fas fa-edit"></i></a>`;
       } else if (!flat && !floating && type === "band") {

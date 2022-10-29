@@ -69,6 +69,24 @@
 
   </div>
   <div class="col s6 m6">
+
     {{{band.image}}}
   </div>
 </div>
+
+<form action="/bands/{{band._id}}" enctype="multipart/form-data" method="post">
+  <a
+    class="image-edit-trigger btn blue-grey darken-4"
+    href="#"
+    data-target="dropdown1"
+  ><i class="fa-solid fa-pencil"></i>Edit</a>
+  <ul id="dropdown1" class="dropdown-content">
+    <input hidden type="file" id="imgFile" name="imgFile" />
+    <label for="imgFile" class="btn green darken-4">Upload a photo</label><input
+      type="submit"
+      class="btn grey darken-1"
+      value="Remove photo"
+    />
+  </ul>
+</form>
+<script src="/js/materialize-init.js"></script>

@@ -31,7 +31,6 @@ module.exports = {
         });
         await Band.create({
           artist: req.body.artist,
-          allCaps: req.body.allCaps,
           state: req.body.state,
           city: req.body.city,
           genre: req.body.genre,
@@ -79,6 +78,7 @@ module.exports = {
       res.render("bands/show", {
         band,
         user: req.user,
+        title: band.artist,
       });
     } catch (err) {
       console.error(err);
@@ -113,17 +113,38 @@ module.exports = {
   updateBand: async (req, res) => {
     try {
       let band = await Band.findById(req.params.id).lean();
-
+      console.log(band.cloudinaryId);
+      let updatedInfo = req.body;
       if (!band) {
         return res.render("error/404");
       }
       if (band.user != req.user.id) {
         res.redirect("/bands");
       } else {
-        band = await Band.findOneAndUpdate({ _id: req.params.id }, req.body, {
-          new: true,
-          runValidators: true,
-        });
+        console.log(req.body);
+        if (req.body.imgFile) {
+          console.log("cumtime");
+          const imgUpload = await cloudinary.uploader.upload(req.file.path, {
+            folder: "local-bands-database",
+          });
+          await cloudinary.uploader.destroy(band.cloudinaryId);
+          let reducedImg = cloudinary.image(imgUpload.secure_url, {
+            width: 400,
+            crop: "pad",
+            gravity: "faces",
+            alt: req.body.artist,
+            class: "materialboxed",
+          });
+          updatedInfo = { ...req.body, ...reducedImg };
+        }
+        band = await Band.findOneAndUpdate(
+          { _id: req.params.id },
+          updatedInfo,
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
 
         res.redirect("/dashboard");
       }
@@ -135,8 +156,10 @@ module.exports = {
   //Deletes one band
   deleteBand: async (req, res) => {
     try {
-      let band = await Band.deleteOne({ _id: req.params.id });
+      let band = await Band.findById({ _id: req.params.id });
       await cloudinary.uploader.destroy(band.cloudinaryId);
+
+      await Band.deleteOne({ _id: req.params.id });
       res.redirect("/bands");
     } catch (err) {
       console.error(err);

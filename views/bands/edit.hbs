@@ -1,6 +1,6 @@
 <h3>Edit Band Info</h3>
 <div class="row">
-  <form action="/bands/{{band._id}}" method="POST" class="col s12">
+  <form action="/bands/{{band._id}}" method="post" class="col s12">
     <input type="hidden" name="_method" value="PUT" />
     <div class="row">
       <div class="input-field">
@@ -77,19 +77,18 @@
         <label for="status">Status</label>
       </div>
     </div>
-
-    <div class="input-field"><input
-        hidden
-        data-hidden-all-caps
-        type="text"
-        name="allCaps"
-      /></div>
+    {{!--  <div class="row">
+      {{{band.image}}}
+      <div class="input-field">
+        <p><label for="bandImage">Update Image</label></p>
+        <input type="file" id="bandImage" name="imgFile" />
+      </div>
+    </div> --}}
 
     <div class="row">
       <input type="submit" value="Save" class="btn" />
-      <a href="/bands" class="btn orange">Cancel</a>
+      <a href="/bands/{{band._id}}" class="btn orange">Cancel</a>
     </div>
 
   </form>
 </div>
-<script src="/js/all-caps-input.js"></script>
