@@ -126,6 +126,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+//checking env
+console.log(process.env.GOOGLE_CLIENT_ID);
+console.log(process.env.GOOGLE_CLIENT_SECRET);
+
 // Static Folder
 app.use(express.static(path.join(__dirname, "public")));
 
