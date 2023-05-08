@@ -4,8 +4,8 @@
   const input = document.getElementById("bnd-search");
   const searchFields = document.querySelector("[data-bands-filter-by]");
   const status = document.querySelector("[data-bands-status]");
-  let currentSearchField = searchFields.value;
-  let currentStatus = status.value;
+  let currentSearchField = searchFields?.value;
+  let currentStatus = status?.value;
   //Event listeners to run function on keyup and update filtering option variables
   input.addEventListener("keyup", () => {
     bandsfilterTable();
@@ -38,7 +38,6 @@
         td = tr[i].getElementsByTagName("td")[3];
       let itemStatus = tr[i].getElementsByTagName("td")[4];
 
-      console.log(itemStatus);
       if (td && currentStatus === "any") {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -100,7 +99,6 @@
         td = tr[i].getElementsByTagName("td")[2];
       let itemStatus = tr[i].getElementsByTagName("td")[4];
 
-      console.log(itemStatus);
       if (td && currentStatus === "any") {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {

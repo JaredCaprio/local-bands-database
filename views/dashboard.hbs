@@ -59,8 +59,9 @@
   
   </div>
 
-{{#if bands}}
+
   <table class="dashboard-bands responsive-table bnd-index-table">
+    {{#if bands}}
     <thead data-dashboard-thead class="grey darken-3">
       <tr>
         <th>Artist</th>
@@ -86,15 +87,16 @@
           <td class="spacing-reset">{{{deleteIcon user._id ../user _id "band"}}}</td>          
         </tr>
       {{/each}}
-    </tbody>
-  </table>
-{{else}}
-  <p>You have not created any stoires</p>
-{{/if}}
+       {{else}}
+    {{!-- <p>You have not created any bands</p> --}}
+    </tbody>  
+    
+      {{/if}}  
+  </table> 
 
 
-{{#if venues}}
   <table style="display: none;" class="responsive-table dashboard-venues ven-index-table">
+  {{#if venues}}
     <thead data-dashboard-thead class="grey darken-3">
       <tr>
         <th>Name</th>
@@ -119,12 +121,15 @@
           <td class="spacing-reset">{{{editIcon user ../user _id false false "venue" }}}</td>
           <td class="spacing-reset">{{{deleteIcon user._id ../user _id "venue"}}}</td>          
         </tr>
-      {{/each}}
-    </tbody>
+      {{/each}}          
+    </tbody> 
+    {{else}}
+   {{!--  <p>You have not created any venues</p> --}}
+    {{/if}}    
   </table>
-{{else}}
-  <p>You have not created any stoires</p>
-{{/if}}
+
+
+
 
 {{#if band_succ_msg}}
   <script>

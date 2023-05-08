@@ -16,9 +16,13 @@ const {
 const Handlebars = require("handlebars");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
 
 //Load config
 dotenv.config({ path: "./env/config.env" });
+
+//suppress mongoose deprecation warning
+mongoose.set("strictQuery", true);
 
 // Passport config
 require("./config/passport")(passport);
@@ -30,6 +34,14 @@ const app = express();
 //body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(function (err, req, res, next) {
+  if (err instanceof multer.MulterError) {
+    console.log("Multer Error:", err);
+  } else {
+    console.log("Error:", err);
+  }
+});
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

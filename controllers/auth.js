@@ -4,7 +4,6 @@ const User = require("../models/User");
 
 exports.authGoogle = (req, res) => {
   passport.authenticate("google", { scope: ["profile"] });
-  console.log("cumcum");
 };
 
 exports.googleCallback = (req, res) => {

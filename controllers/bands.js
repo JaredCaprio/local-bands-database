@@ -16,12 +16,11 @@ module.exports = {
         artist: req.body.artist,
         city: req.body.city,
       });
-
       if (!findBand) {
         const imgUpload = await cloudinary.uploader.upload(req.file.path, {
           folder: "local-bands-database",
         });
-        console.log(req.file.path);
+
         let reducedImg = cloudinary.image(imgUpload.secure_url, {
           width: 400,
           crop: "pad",
@@ -71,7 +70,7 @@ module.exports = {
   showOneBand: async (req, res) => {
     try {
       let band = await Band.findById(req.params.id).populate("user").lean();
-
+      console.log(band.cloudinaryId);
       if (!band) {
         return res.render("error/404");
       }
@@ -113,29 +112,35 @@ module.exports = {
   updateBand: async (req, res) => {
     try {
       let band = await Band.findById(req.params.id).lean();
-      console.log(band.cloudinaryId);
       let updatedInfo = req.body;
+
       if (!band) {
-        return res.render("error/404");
+        return res.json(false);
       }
-      if (band.user != req.user.id) {
-        res.redirect("/bands");
+      if (band.user.toString() != req.user.id) {
+        res.json(false);
       } else {
-        console.log(req.body);
-        if (req.body.imgFile) {
-          console.log("cumtime");
+        if (req.file) {
           const imgUpload = await cloudinary.uploader.upload(req.file.path, {
             folder: "local-bands-database",
           });
-          await cloudinary.uploader.destroy(band.cloudinaryId);
-          let reducedImg = cloudinary.image(imgUpload.secure_url, {
+          console.log(imgUpload);
+          const destroyImg = await cloudinary.uploader.destroy(
+            band.cloudinaryId
+          );
+
+          band.cloudinaryId = imgUpload.public_id;
+          let image = cloudinary.image(imgUpload.secure_url, {
             width: 400,
-            crop: "pad",
-            gravity: "faces",
-            alt: req.body.artist,
+            alt: `${req.body.artist} image`,
             class: "materialboxed",
           });
-          updatedInfo = { ...req.body, ...reducedImg };
+          console.log(image);
+          updatedInfo = {
+            ...req.body,
+            image,
+            cloudinaryId: imgUpload.public_id,
+          };
         }
         band = await Band.findOneAndUpdate(
           { _id: req.params.id },
@@ -145,14 +150,14 @@ module.exports = {
             runValidators: true,
           }
         );
-
-        res.redirect("/dashboard");
+        res.json(true);
       }
     } catch (err) {
       console.error(err);
       return res.render("error/500");
     }
   },
+
   //Deletes one band
   deleteBand: async (req, res) => {
     try {
@@ -160,12 +165,13 @@ module.exports = {
       await cloudinary.uploader.destroy(band.cloudinaryId);
 
       await Band.deleteOne({ _id: req.params.id });
-      res.redirect("/bands");
+      res.redirect("/dashboard");
     } catch (err) {
       console.error(err);
       return res.render("error/404");
     }
   },
+
   //Displays all bands by the given user
   usersBands: async (req, res) => {
     try {
@@ -184,22 +190,27 @@ module.exports = {
       res.render("error/404");
     }
   },
+
   searchBand: async (req, res) => {
     try {
       const findBy = req.body.searchBy;
       let query = req.body.query;
+      let status = req.body.status;
       if (/[a-zA-Z0-9]/g.test(query)) {
         query = req.body.query;
-        console.log("true", typeof query);
+      }
+      if (req.body.status === "any") {
+        status = ".";
       }
       const bands = await Band.find({
         [findBy]: { $regex: RegExp(query, "i") },
-        status: req.body.status,
+        status: { $regex: RegExp(status, "i") },
       })
         .populate("user")
         .sort({ artist: 1 })
         .limit(50)
         .lean();
+
       res.render("bands/index", { bands });
     } catch (error) {
       res.render("error/404");

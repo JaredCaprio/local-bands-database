@@ -34,7 +34,7 @@ router.get("/edit/:id", ensureAuth, bandsController.showEditBand);
 router.put(
   "/:id",
   ensureAuth,
-  upload.single("imgFile"),
+  upload.single("file"),
   bandsController.updateBand
 );
 

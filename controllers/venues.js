@@ -94,7 +94,7 @@ module.exports = {
     console.log(req.params.id);
     try {
       await Venue.deleteOne({ _id: req.params.id });
-      res.redirect("/venues");
+      res.redirect("/dashboard");
     } catch (error) {
       res.redirect("error/404");
       console.error(error);

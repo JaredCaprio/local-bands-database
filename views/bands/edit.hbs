@@ -1,7 +1,6 @@
 <h3>Edit Band Info</h3>
 <div class="row">
-  <form action="/bands/{{band._id}}" method="post" class="col s12">
-    <input type="hidden" name="_method" value="PUT" />
+  <form class="col s12 band-edit-form">
     <div class="row">
       <div class="input-field">
         <input
@@ -77,13 +76,13 @@
         <label for="status">Status</label>
       </div>
     </div>
-    {{!--  <div class="row">
+    <div class="row">
       {{{band.image}}}
       <div class="input-field">
-        <p><label for="bandImage">Update Image</label></p>
-        <input type="file" id="bandImage" name="imgFile" />
+        <p><label for="bandImage">Select File to Update Image</label></p>
+        <input type="file" id="bandImage" name="file" id="file" />
       </div>
-    </div> --}}
+    </div>
 
     <div class="row">
       <input type="submit" value="Save" class="btn" />
@@ -91,4 +90,5 @@
     </div>
 
   </form>
+  <script src="/js/img-update.js" defer></script>
 </div>

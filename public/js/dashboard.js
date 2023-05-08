@@ -6,18 +6,26 @@ const bandsFilter = document.querySelector(".bands-filter");
 const venuesFilter = document.querySelector(".venues-filter");
 
 /* Swtiching between venues and bands display on the dashboard */
+
+function switchToActive(activate, deactivate, displayVal) {
+  activate.style.display = displayVal;
+  deactivate.style.display = "none";
+}
+
+function activateBtn(activate, deactivate, activeClass, inactiveClass) {
+  activate.classList.add(activeClass);
+  activate.classList.remove(inactiveClass);
+  deactivate.classList.add(inactiveClass);
+  deactivate.classList.remove(activeClass);
+}
+
 bandsTabBtn.addEventListener("click", () => {
   if (bandsDashboard.style.display === "table") {
     return;
   } else {
-    bandsDashboard.style.display = "table";
-    venuesDashboard.style.display = "none";
-    venuesFilter.style.display = "none";
-    bandsFilter.style.display = "block";
-    venuesTabBtn.classList.remove("darken-2");
-    venuesTabBtn.classList.add("darken-3");
-    bandsTabBtn.classList.add("darken-2");
-    bandsTabBtn.classList.remove("darken-3");
+    switchToActive(bandsDashboard, venuesDashboard, "table");
+    switchToActive(bandsFilter, venuesFilter, "block");
+    activateBtn(bandsTabBtn, venuesTabBtn, "darken-2", "darken-3");
   }
 });
 
@@ -25,14 +33,9 @@ venuesTabBtn.addEventListener("click", () => {
   if (venuesDashboard.style.display === "table") {
     return;
   } else {
-    venuesDashboard.style.display = "table";
-    bandsDashboard.style.display = "none";
-    venuesFilter.style.display = "block";
-    bandsFilter.style.display = "none";
-    bandsTabBtn.classList.remove("darken-2");
-    bandsTabBtn.classList.add("darken-3");
-    venuesTabBtn.classList.add("darken-2");
-    venuesTabBtn.classList.remove("darken-3");
+    switchToActive(venuesDashboard, bandsDashboard, "table");
+    switchToActive(venuesFilter, bandsFilter, "block");
+    activateBtn(venuesTabBtn, bandsTabBtn, "darken-2", "darken-3");
   }
 });
 
