@@ -53,7 +53,12 @@
     <div class="row">
       <div class="input-field">
         <p><label for="bandImage">Band Image</label></p>
-        <input type="file" id="bandImage" name="imgFile" />
+        <input
+          type="file"
+          id="bandImage"
+          name="imgFile"
+          accept=".jpg, .jpeg, .png"
+        />
       </div>
     </div>
     <div class="row">
@@ -70,4 +75,10 @@
     window.onload = function(){ M.toast({ html: '{{band_error_msg}}', classes:
     "black-text red" }) }
   </script>
+{{else if file_type_err_msg}}
+  <script>
+    window.onload = function(){ M.toast({ html: '{{file_type_err_msg}}',
+    classes: "black-text red" }) }
+  </script>
+
 {{/if}}

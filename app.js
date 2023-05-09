@@ -123,12 +123,9 @@ app.use(function (req, res, next) {
   res.locals.band_error_msg = req.flash("band_error_msg");
   res.locals.band_succ_msg = req.flash("band_succ_msg");
   res.locals.venue_succ_msg = req.flash("venue_succ_msg");
+  res.locals.file_type_err_msg = req.flash("file_type_error_msg");
   next();
 });
-
-//checking env
-console.log(process.env.GOOGLE_CLIENT_ID);
-console.log(process.env.GOOGLE_CLIENT_SECRET);
 
 // Static Folder
 app.use(express.static(path.join(__dirname, "public")));

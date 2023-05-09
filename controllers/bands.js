@@ -16,19 +16,19 @@ module.exports = {
         artist: req.body.artist,
         city: req.body.city,
       });
-      if (!findBand) {
+
+      if (!findBand && req.file !== undefined) {
+        console.log("did hit");
         const imgUpload = await cloudinary.uploader.upload(req.file.path, {
           folder: "local-bands-database",
         });
 
         let reducedImg = cloudinary.image(imgUpload.secure_url, {
           width: 400,
-          crop: "pad",
-          gravity: "faces",
           alt: req.body.artist,
           class: "materialboxed",
         });
-        await Band.create({
+        const newBand = await Band.create({
           artist: req.body.artist,
           state: req.body.state,
           city: req.body.city,
@@ -40,6 +40,9 @@ module.exports = {
           cloudinaryId: imgUpload.public_id,
         });
         req.flash("band_succ_msg", "Band added");
+        res.redirect(`/bands/${newBand._id}`);
+      } else if (req.file === undefined) {
+        req.flash("file_type_err_msg", "File Type Not Supported");
         res.redirect("/dashboard");
       } else {
         req.flash("band_error_msg", "Band already exists");
@@ -121,6 +124,7 @@ module.exports = {
         res.json(false);
       } else {
         if (req.file) {
+          console.log(req.file.path);
           const imgUpload = await cloudinary.uploader.upload(req.file.path, {
             folder: "local-bands-database",
           });
@@ -154,7 +158,9 @@ module.exports = {
       }
     } catch (err) {
       console.error(err);
-      return res.render("error/500");
+      console.log("catch activated");
+      req.flash("file_type_err_msg", "File Type Not Supported");
+      return res.redirect("/dashboard");
     }
   },
 

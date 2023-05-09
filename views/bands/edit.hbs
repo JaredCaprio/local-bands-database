@@ -91,4 +91,12 @@
 
   </form>
   <script src="/js/img-update.js" defer></script>
+
+  {{#if file_type_err_msg}}
+    <script>
+      window.onload = function(){ M.toast({ html: '{{file_type_err_msg}}',
+      classes: "black-text red" }) }
+    </script>
+
+  {{/if}}
 </div>
