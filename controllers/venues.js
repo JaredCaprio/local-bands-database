@@ -91,7 +91,6 @@ module.exports = {
   },
   //Renders the delete venue page
   deleteVenue: async (req, res) => {
-    console.log(req.params.id);
     try {
       await Venue.deleteOne({ _id: req.params.id });
       res.redirect("/dashboard");
@@ -120,11 +119,17 @@ module.exports = {
   },
   searchVenue: async (req, res) => {
     try {
-      console.log(req.body.setStatus);
-      const queryAllCaps = req.body.query.toUpperCase();
-      const venues = await Venue.find({
-        allCaps: { $regex: RegExp(queryAllCaps, "i") },
-      })
+      const status = req.body.setStatus;
+      const searchBy = req.body.searchBy;
+      const queryParam = req.body.query;
+      const query = {
+        [searchBy]: { $regex: RegExp(queryParam, "i") },
+      };
+      if (status !== "any") {
+        query.status = status;
+      }
+
+      const venues = await Venue.find(query)
         .populate("user")
         .sort({ name: 1 })
         .limit(50)

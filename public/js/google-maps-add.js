@@ -29,8 +29,6 @@ function initMap() {
   let mapAdd = new google.maps.Map(mapAddEl, options);
 
   if (navigator.geolocation) {
-    console.log("geolocation is here");
-
     navigator.geolocation.getCurrentPosition(
       (loc) => {
         location.lat = loc.coords.latitude;
@@ -40,12 +38,10 @@ function initMap() {
         mapAdd = new google.maps.Map(mapAddEl, optionsZoom);
       },
       (err) => {
-        console.log("user clicked no");
         mapAdd = new google.maps.Map(mapAddEl, optionsZoom);
       }
     );
   } else {
-    console.log("geolocation not supported");
     mapAdd = new google.maps.Map(mapAddEl, optionsZoom);
   }
 
@@ -60,7 +56,6 @@ function initMap() {
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
     const placeAddress = place.address_components;
-    console.log(place);
     let placeLat = place.geometry.location.lat();
     location.lat = placeLat;
     let placeLng = place.geometry.location.lng();

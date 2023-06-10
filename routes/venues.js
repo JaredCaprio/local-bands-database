@@ -37,8 +37,8 @@ router.delete("/:id", ensureAuth, venuesController.deleteVenue);
 // @route GET /venues/user/:userid
 router.get("/user/:userId", ensureAuth, venuesController.usersVenues);
 
-// @desc renders all venues created by given user
-// @route GET /venues/user/:userid
+// @desc search in db for venue from query
+// @route GET /venues/search
 router.post("/search", venuesController.searchVenue);
 
 module.exports = router;

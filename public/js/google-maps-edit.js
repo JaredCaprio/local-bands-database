@@ -10,6 +10,7 @@ function initMap() {
   };
   locationEdit.lat = parseFloat(editLat.value);
   locationEdit.lng = parseFloat(editLng.value);
+
   const mapEdit = new google.maps.Map(mapEditEl, editOptions);
   const userMarker = new google.maps.Marker({
     position: locationEdit,

@@ -100,9 +100,10 @@ layer(framework);
     color: red;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 668px) {
     .size-reduce {
       font-size: 1.25em !important;
+      display: none;
     }
     .dashboard-venues {
       display: none;

@@ -3,12 +3,9 @@ let formDataObj = new FormData(form);
 
 form.addEventListener("change", () => {
   formDataObj = new FormData(form);
-  console.log();
 });
 
 const url = window.location.pathname.replace("edit/", "");
-
-console.log(formDataObj);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
