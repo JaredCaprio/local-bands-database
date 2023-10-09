@@ -10,7 +10,7 @@ Welcome to the Local Bands Database, your gateway to exploring and contributing 
 
 #### 🎸 Add bands to the Database
 
-## ![Demo-gif-2](Demo-gif-2.gif)
+![Demo-gif-2](Demo-gif-2.gif)
 
 #### 👤 View and edit you profile
 
